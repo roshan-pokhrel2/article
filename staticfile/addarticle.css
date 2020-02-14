@@ -1,0 +1,65 @@
+.top p{
+    margin: 3rem 3rem;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.contact{
+    text-align: center;
+    
+}
+
+.socialmedia{
+    text-align: center;
+    margin: 3rem 3rem;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
+
+
+.last{
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background: repeating-linear-gradient(60deg, black , yellowgreen , crimson);
+    color: white;
+    font-style: italic;
+    text-align: center;
+    justify-content: center;
+}
+.last p{
+    margin-top: 1rem;
+    font-size: 20px;
+}
+.info input{
+    border: rgb(111, 236, 9);
+    overflow: hidden;
+    box-shadow: rgb(259, 208, 0);
+    box-sizing: border-box;
+    font-size: 25px;
+    border-radius: 25px;
+
+}
+.info input:focus{
+    border-style: groove;
+    border-color: 2px solid crimson;
+
+}
+.info button{
+    background: indigo;
+    font-size: 25px;
+    border-radius: 15px;
+    color: white;
+}
+.info{
+    padding-top: 15px;
+    color: white;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   
+}

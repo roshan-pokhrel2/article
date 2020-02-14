@@ -1,0 +1,230 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/f11a3f974a.js" crossorigin="anonymous"></script>
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" media="screen and (max_width:1100px)">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Fruktur&display=swap" rel="stylesheet">
+    <title>{% block title %}MyArticles{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">MyArticles</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/article">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact us</a>
+                    </li>
+                 
+
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+                    <input class="form-control mr-sm-2" type="search" name = 'query' placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+
+            </form>
+
+            {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{request.user}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/addarticles">Add Articles</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                   
+                  
+                </div>
+            </div>
+            {% else %}
+            <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#exampleModal">
+                Login
+            </button>
+            {% endif %}
+            </div>
+        </nav>
+
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>Note:</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% endfor %}
+
+        {% block body %}
+
+
+        <h1> Welcome to MyArticles!</h1>
+
+        <div class="container">
+            {% if user.is_authenticated %}
+            
+
+
+        <div class="texts">
+         
+            <p> This is a newly released website to post your articles.This website is under construction and will be updated weekly.
+                <br>
+                You can post your articles and share with other people. If you face any kind of problem please inform us.<br> 
+                You can use contact us section to get in touch with us.
+            </p>
+            <a href="/article">
+                <button class="Read-Here" type="submit" aria-placeholder="read">Read Here</button>
+
+            </a>
+        </div>
+
+            {% else %}
+            <div class="frame">
+                <form method="POST" action="{% url 'signup' %}"> {% csrf_token %}
+                    <h2>Sign Up Here!</h2>
+                    <label class="user" for="user">Full Name:</label><br>
+                    <input type="text" class="name" id="user" name="user" required><br>
+
+
+                    <label class="user" for="mail"> E-mail:</label><br>
+                    <input type="email" class="emailhelp" id="mail" name="mail" required><br>
+
+                    <label class="user" for="password">Password:</label><br>
+                    <input type="password" class="paswd" id="password" name="password" required><br>
+
+                    <label class="user" for="repassword"> Re-enter Password:</label><br>
+                    <input type="password" class="paswd2" id="repassword" name="repassword" required><br><br>
+
+                    <button type="submit" class="btn btn-primary btn-lg">SignUp</button>
+                </form>
+            </div>{% endif %}
+        </div>
+
+
+
+    </header>{% endblock %}
+    <section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+
+                        <div class="modal-body">
+                            <div class="login-form">
+                                <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+                                    <h2 class="text-center">Log in</h2>
+
+                                    <div class="form-group">
+                                        <label1 for="username">Username</label1>
+                                        <input type="text" class="form-control" id="username" name="signmail"
+                                            placeholder="username" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label1 for="Password">Password</label1>
+                                        <input type="password" class="form-control" id="Password" name='signpawd'
+                                            placeholder="Password" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Log
+                                            in</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                </form>
+
+    </section>
+    <footer>
+        <div class="top">
+            <div class="contacts">
+                <p> phone:789456123</p>
+                <p> Email:roshan@yahoo.com</p>
+                <p> location:Butwal</p>
+
+            </div>
+            <div class="socialmedia">
+               
+                <h3><i class="fab fa-facebook">--Roo shan</i></h3>
+                <h3><i class="fab fa-instagram">--Roshan</i></h3>
+                <h3><i class="fab fa-twitter">--Roshan pokhrel</i></h3>
+                <h3><i class="fab fa-youtube">--MyArticles</i></h3>
+
+
+            </div>
+
+            <div class="info">
+              
+               
+                <input type="text" id='text' placeholder="--Enter Email "><br>
+                <button class="Read-Here" type="submit" aria-placeholder="read">Subscribe</button>
+
+
+            </div>
+
+        </div>
+
+        <div class="last">
+            <p>&copy;MyArticles|Designed By Roshan</p>
+        </div>
+
+    </footer>
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

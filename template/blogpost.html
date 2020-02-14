@@ -1,0 +1,57 @@
+{% extends 'index.html'%}
+{% load static %}
+
+{% block title %}   Articles       {% endblock %}
+{% block body %}
+<style>
+  .container{
+    width: 100%;
+    height: 95%;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    
+  
+  }
+  h3{
+   
+    font-weight: bold;
+    color: brown;
+    font-size: 39px;
+   
+
+  }
+
+  .container img{
+    height: 300px;
+    width: 500px;
+  }
+
+  .container p{
+    font-size: 20px;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+ 
+</style>
+<div class="container">
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0"></script>
+  
+  {% for blog in arti %}
+
+  <h3>{{blog.title}}</h3>
+  <small>By: {{blog.username}} on {{blog.date}}</small><br>
+  <img src='{{blogs.image}}'><br><br>
+
+
+  
+  <p>{{blog.description}} </p>
+  <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/1" data-width="" data-numposts="5"></div>
+ 
+          
+
+</div>
+{% endfor %}
+{% endblock %}

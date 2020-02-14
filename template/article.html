@@ -1,0 +1,32 @@
+{% extends 'index.html'%}
+{% load static %}
+
+{% block title %}   Articles       {% endblock %}
+
+{% block css %}     <link rel="stylesheet" type="text/css" href="{% static 'article.css' %}">      {% endblock %}
+
+{% block body %}  
+<div class="container">
+    <h1> Enjoy Reading our blogs here</h1>
+    {% for blog in arti %}
+    <div class="article">
+        <div class="card">
+            <div class="card-header">
+            By: {{blog.username}} on {{blog.date}}
+            </div>
+            <div class="card-body">
+              <img src={{blogs.image}}>
+              <h5 class="card-title">{{blog.title}}</h5>
+              <p class="card-text">{{blog.description|truncatewords:100}} </p>
+              <a href="{% url 'blogpost' blog.pk %}"  class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+    </div>{% endfor %}
+</div>
+{% endblock %}
+
+
+
+
+
+
