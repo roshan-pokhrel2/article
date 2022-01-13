@@ -17,7 +17,7 @@ lazy-object-proxy==1.4.3
 mccabe==0.6.1
 numpy==1.17.3
 pefile==2019.4.18
-Pillow==6.2.1
+Pillow==9.0.0
 pipenv==2018.11.26
 psycopg2==2.8.4
 pycodestyle==2.5.0
